@@ -4,10 +4,11 @@ This directory contains practical examples of using house agents in real-world s
 
 ## Examples Overview
 
-1. **security-audit.md** - Finding security issues in a codebase
-2. **refactoring-workflow.md** - Multi-agent refactoring workflow
-3. **api-integration.md** - Setting up external API integrations
-4. **test-and-build.md** - Running tests and builds efficiently
+1. **security-audit.md** - Finding security issues in a codebase (house-research)
+2. **refactoring-workflow.md** - Multi-agent refactoring workflow (house-research + house-bash)
+3. **api-integration.md** - Setting up external API integrations (house-mcp - disabled)
+4. **test-and-build.md** - Running tests and builds efficiently (house-bash)
+5. **git-workflow.md** - Pre-merge code review workflow (house-git + house-bash)
 
 ## How to Use These Examples
 

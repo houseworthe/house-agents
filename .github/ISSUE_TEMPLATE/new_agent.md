@@ -85,7 +85,7 @@ When should Claude Code automatically suggest this agent?
 
 Does this overlap with existing agents?
 - **house-research**: [Yes/No - Explain]
-- **house-mcp**: [Yes/No - Explain]
+- **house-git**: [Yes/No - Explain]
 - **house-bash**: [Yes/No - Explain]
 
 ## Implementation Plan

@@ -15,7 +15,7 @@ Install agents in your current project only (`.claude/agents/` directory).
 **Copy this into Claude Code:**
 
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-mcp.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-git.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
 ```
 
 **What this does:**
@@ -78,7 +78,7 @@ cp -r /tmp/house-agents/.claude .
 
 # Verify installation
 ls .claude/agents/
-# Should show: house-bash.md, house-mcp.md, house-research.md
+# Should show: house-bash.md, house-git.md, house-research.md
 ```
 
 #### User-Wide Installation
@@ -94,7 +94,7 @@ cp /tmp/house-agents/.claude/agents/*.md ~/.claude/agents/
 
 # Verify installation
 ls ~/.claude/agents/
-# Should show: house-bash.md, house-mcp.md, house-research.md
+# Should show: house-bash.md, house-git.md, house-research.md
 ```
 
 ### Step 3: Verify Installation
@@ -107,7 +107,7 @@ List all available sub-agents
 
 You should see:
 - house-research
-- house-mcp
+- house-git
 - house-bash
 
 Alternatively, use the `/agents` command in Claude Code.
@@ -128,11 +128,16 @@ Use house-bash to check the current git status
 ```
 Expected: Summary of git status (not raw output)
 
-**Test house-mcp (if you have MCP tools):**
+**Test house-git:**
 ```
-Use house-mcp to show me available MCP tools
+Use house-git to review my current git diff
 ```
-Expected: List of available MCP integrations
+Expected: Condensed summary with categorization (not raw diff output)
+
+Note: If no git changes exist, try:
+```
+Use house-git to analyze the last 5 commits
+```
 
 ---
 

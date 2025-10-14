@@ -409,6 +409,166 @@ Bundle Analysis:
 
 ---
 
+### House Git Examples
+
+#### Example 1: Reviewing a Large Diff
+
+**You:**
+```
+Use house-git to review my staged changes
+```
+
+**House Git Agent Returns:**
+```
+## Git Analysis: Staged Changes Review
+
+### Status
+📊 Summary: 12 files changed, 347 insertions(+), 189 deletions(-)
+
+### Key Changes by Impact
+
+**🔴 CRITICAL (Review Carefully)**
+- `src/auth/middleware.js:45-67` - Added new authentication check
+- `config/api.js:12` - Changed API endpoint URL
+- Relevance: Security and configuration changes
+
+**🟡 MEDIUM (Notable Changes)**
+- `api/users/controller.js:102-145` - Refactored user creation logic
+- `api/users/validator.js:23-45` - Updated validation rules
+- `tests/users.test.js:89-156` - Added new test cases
+- Relevance: Core functionality with test coverage
+
+**🟢 MINOR (Low Risk)**
+- `styles/components/button.css:234-236` - Updated button hover color
+- `docs/API.md:45-48` - Updated API documentation
+- `package.json:23` - Bumped dependency version
+- Relevance: Non-functional or low-impact changes
+
+### Changes by File Type
+- **Source Code**: 8 files (src/, api/)
+- **Tests**: 2 files (tests/)
+- **Configuration**: 1 file (config/)
+- **Documentation**: 1 file (docs/)
+
+### Recommendations
+1. Carefully review authentication middleware changes
+2. Verify API endpoint URL is correct for production
+3. Ensure test coverage is adequate for user controller refactor
+4. Consider running tests before committing: `npm test`
+```
+
+**Your Next Message:**
+```
+Run the test suite to verify these changes
+```
+
+---
+
+#### Example 2: Branch Comparison Before Merge
+
+**You:**
+```
+Use house-git to compare feature-user-export with main
+```
+
+**House Git Agent Returns:**
+```
+## Git Analysis: Branch Comparison (feature-user-export vs main)
+
+### Status
+📊 Summary: 7 files changed, 156 insertions(+), 23 deletions(-)
+📍 Branches: feature-user-export is 8 commits ahead of main
+
+### Key Changes by Impact
+
+**🔴 CRITICAL (Review Carefully)**
+- `api/users/export.js:1-89` - NEW FILE: User export endpoint
+- `config/permissions.js:34` - Added EXPORT_USERS permission
+- Relevance: New feature with permission implications
+
+**🟡 MEDIUM (Notable Changes)**
+- `api/users/routes.js:67` - Added new /export endpoint route
+- `utils/csv-generator.js:1-45` - NEW FILE: CSV generation utility
+- `tests/export.test.js:1-78` - NEW FILE: Export endpoint tests
+- Relevance: New functionality with test coverage
+
+**🟢 MINOR (Low Risk)**
+- `docs/API.md:123-134` - Documented new export endpoint
+- Relevance: Documentation update
+
+### Merge Status
+✅ No conflicts detected - safe to merge
+
+### Commit Summary
+Recent commits on feature-user-export:
+- a1b2c3d "Add user export endpoint"
+- e4f5g6h "Implement CSV generation"
+- i7j8k9l "Add export tests"
+- [... 5 more commits]
+
+### Recommendations
+1. Verify EXPORT_USERS permission is properly enforced
+2. Test CSV export with large datasets (performance)
+3. Ensure export respects user privacy/GDPR requirements
+4. Run full test suite before merging: `npm test`
+5. Consider adding rate limiting to export endpoint
+```
+
+---
+
+#### Example 3: Commit History Analysis
+
+**You:**
+```
+Use house-git to analyze the last 10 commits on main
+```
+
+**House Git Agent Returns:**
+```
+## Git Analysis: Last 10 Commits on main
+
+### Summary
+📅 Timespan: Last 10 commits span 5 days (Jan 10-14)
+👥 Authors: 3 contributors (Alice: 6, Bob: 3, Carol: 1)
+📊 Total Changes: 47 files, 892 insertions(+), 341 deletions(-)
+
+### Commits by Category
+
+**🔧 Features (4 commits)**
+- `a1b2c3d` - Add user export functionality (Alice, Jan 14)
+  - Modified: api/users/, utils/, tests/
+- `e4f5g6h` - Implement search filters (Bob, Jan 12)
+  - Modified: api/search/, components/
+- `i7j8k9l` - Add pagination to user list (Alice, Jan 11)
+  - Modified: api/users/, components/UserList.js
+
+**🐛 Bug Fixes (3 commits)**
+- `m8n9o0p` - Fix authentication timeout (Alice, Jan 13)
+  - Modified: src/auth/middleware.js:45
+- `q1r2s3t` - Resolve CSV export encoding issue (Bob, Jan 12)
+  - Modified: utils/csv-generator.js:23
+
+**📦 Dependencies (2 commits)**
+- `u4v5w6x` - Update security dependencies (Carol, Jan 10)
+  - Modified: package.json, package-lock.json
+
+**📝 Documentation (1 commit)**
+- `y7z8a9b` - Update API documentation (Alice, Jan 14)
+  - Modified: docs/API.md
+
+### Files Most Modified
+1. `api/users/controller.js` - 4 commits, 234 changes
+2. `utils/csv-generator.js` - 3 commits, 156 changes
+3. `tests/users.test.js` - 3 commits, 189 changes
+
+### Recommendations
+1. Consider creating a release tag for the export feature
+2. User-related code is seeing heavy activity - may need refactoring
+3. Good test coverage being maintained
+```
+
+---
+
 ## Multi-Agent Workflows
 
 ### Workflow 1: Refactoring Authentication System
@@ -500,6 +660,17 @@ Best for: Large refactors, security reviews
 3. "Use house-research to find similar patterns in other files"
 4. [Implement changes across codebase]
 5. "Use house-bash to run full test suite"
+```
+
+### Pattern 4: Pre-Merge Review
+
+Best for: Code review, merge safety checks
+
+```
+1. "Use house-git to compare feature-branch with main"
+2. [Review critical changes identified]
+3. "Use house-bash to run tests on feature-branch"
+4. [Make merge decision]
 ```
 
 ---

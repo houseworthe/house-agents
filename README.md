@@ -20,10 +20,6 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 **House Agents** are specialized Claude Code sub-agents that run in their own context windows. Each agent handles specific heavy operations and returns condensed results to your main conversation.
 
-<div align="center">
-  <img src="assets/token-savings-diagram.svg" alt="Token Savings: Without vs With House Agents - 98% reduction" width="100%">
-</div>
-
 ### The Three House Agents
 
 1. **🔍 House Research** - File and documentation search specialist
@@ -38,7 +34,7 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 Copy and paste into Claude Code:
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-mcp.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-git.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
 ```
 
 **User-Wide (all projects):**
@@ -100,37 +96,45 @@ Use house-bash to check the current git status
 
 Expected: Should return a summary of git status (not raw output)
 
-**4. Check agents are loaded:**
+**4. Test House Git:**
+```
+Use house-git to review my current git diff
+```
+
+Expected: Should return a condensed summary of changes (not raw diff output)
+
+**5. Check agents are loaded:**
 ```
 List all available sub-agents
 ```
 
-Expected: Should show house-research, house-mcp, and house-bash in the list
+Expected: Should show house-research, house-git, and house-bash in the list
 
 **Troubleshooting:**
 - If agents don't show up, run `ls .claude/agents/` to verify files exist
 - If agents error, check the agent files for syntax errors
 - User-level agents: `ls ~/.claude/agents/` to verify installation
 - Try `/agents` command in Claude Code to see all loaded agents
+- For house-git: If "no changes" message appears, make some test edits first
 
 ### Real-World Test Example
 
-Here's a complete workflow to test all three agents:
+Here's a complete workflow to test all agents:
 
 **In Claude Code, try this:**
 
 ```
 1. Use house-research to find all console.log statements in my codebase
 2. Use house-bash to run "npm test" and analyze any failures
-3. Use house-mcp to show me how to set up a basic Express server with error handling
+3. Use house-git to review my recent git changes
 ```
 
 **What you should see:**
 - House Research returns: List of files with console.log + line numbers (not full file contents)
 - House Bash returns: Test summary with pass/fail counts (not full npm output)
-- House MCP returns: Working Express code with comments (not entire documentation)
+- House Git returns: Change summary by impact (Critical/Medium/Minor) (not raw diff output)
 
-All in condensed format (5k-10k tokens total instead of 100k+).
+All in condensed format (3k-8k tokens total instead of 50k+).
 
 ## The Agents
 
@@ -153,7 +157,7 @@ All in condensed format (5k-10k tokens total instead of 100k+).
 - Condensed findings with source references (`file:line`)
 - Pattern summaries across files
 - Actionable next steps
-- Under 5k tokens (typically 90% reduction)
+- Condensed format instead of full file contents
 
 ### 🔧 House MCP
 
@@ -173,10 +177,10 @@ All in condensed format (5k-10k tokens total instead of 100k+).
 ```
 
 **What It Returns:**
-- Working configuration code
-- Minimal usage examples
-- Important gotchas and notes
-- Under 3k tokens (typically 88% reduction)
+- Working configuration code (minimal, 20-30 lines)
+- One usage example (5-10 lines)
+- Critical gotchas only
+- Concise output instead of verbose documentation
 
 ### ⚡ House Bash
 
@@ -198,7 +202,30 @@ All in condensed format (5k-10k tokens total instead of 100k+).
 - Error analysis with suggested fixes
 - Key metrics (test counts, build time)
 - Relevant output snippets (not full logs)
-- Under 4k tokens (typically 85% reduction)
+- Parsed summaries instead of raw command output
+
+### 🔀 House Git
+
+**Use For:**
+- Reviewing large diffs (100+ line changes)
+- Branch comparison before merging
+- Commit history analysis
+- Merge conflict identification
+- Change impact assessment
+
+**Example Invocations:**
+```
+"Use house-git to review my staged changes"
+"Compare feature-branch with main using house-git"
+"Analyze the last 10 commits with house-git"
+```
+
+**What It Returns:**
+- Summary: X files changed, Y insertions, Z deletions
+- Key changes by impact (Critical/Medium/Minor)
+- Changes grouped by file type (source/tests/config/docs)
+- Merge conflict locations (if applicable)
+- Recommendations for review focus
 
 ## When to Use House Agents
 
@@ -218,40 +245,27 @@ All in condensed format (5k-10k tokens total instead of 100k+).
 - **Quick commands** (ls, git status)
 - **Learning/exploration** (when you want full context)
 
-## Token Savings
-
-Real-world examples:
-
-| Task | Without House Agents | With House Agents | Savings |
-|------|---------------------|-------------------|---------|
-| Search 100 files | 250k tokens | 5k tokens | **98%** |
-| Configure WordPress plugin | 180k tokens | 2k tokens | **99%** |
-| Run test suite | 150k tokens | 3k tokens | **98%** |
-| Multi-step workflow | 580k tokens | 10k tokens | **98%** |
-
-**Cost Impact:** At $3/M input tokens, a complex task saves ~$1.50 per operation.
-
 ## Architecture
 
 ```
 Main Claude Code Session
-├── Clean context (~20k tokens)
+├── Clean context
 ├── Focus on implementation
 └── Receives condensed results from:
     │
     ├─→ House Research (separate context)
-    │   ├── Searches 100 files (250k tokens in its context)
-    │   └── Returns 5k token summary to main
+    │   ├── Searches many files in its own context
+    │   └── Returns condensed summary to main
     │
     ├─→ House MCP (separate context)
-    │   ├── Reads verbose docs (180k tokens in its context)
-    │   └── Returns 2k token config to main
+    │   ├── Reads verbose docs in its own context
+    │   └── Returns minimal config to main
     │
     └─→ House Bash (separate context)
-        ├── Runs commands (150k tokens output in its context)
-        └── Returns 3k token summary to main
+        ├── Runs commands in its own context
+        └── Returns parsed summary to main
 
-Your main context: 10k tokens (instead of 580k!)
+Heavy operations happen in agent contexts, not yours.
 ```
 
 ## Tips & Best Practices
@@ -320,7 +334,7 @@ Claude Code loads both, with project-level taking precedence.
 2. **No shared memory** - Each agent starts fresh (no state between calls)
 3. **Cost**: More API calls, but often fewer total tokens = lower cost
 4. **Learning curve** - Knowing when to use which agent takes practice
-5. **MCP Tool Access (Known Bug)** - Sub-agents currently cannot access MCP tools, despite documentation stating they should inherit them. This is a confirmed bug in Claude Code ([Issue #7296](https://github.com/anthropics/claude-code/issues/7296)). **Impact**: `house-mcp` can only use WebFetch for documentation (not native MCP tools like Context7, Notion, etc.). The agent will work once this bug is fixed.
+5. **MCP Tool Access (Known Bug)** - Sub-agents currently cannot access MCP tools due to [Issue #7296](https://github.com/anthropics/claude-code/issues/7296). This affects potential future agents (house-mcp, house-data) that would benefit from MCP integrations. Current production agents (house-research, house-bash, house-git) use built-in tools only.
 
 ## Examples
 
@@ -329,6 +343,30 @@ See [USAGE.md](./USAGE.md) for detailed examples:
 - Configuring complex integrations
 - Running CI/CD pipelines
 - Multi-agent workflows
+
+## Future Agents
+
+The following agents are planned but not yet implemented due to technical limitations:
+
+### 🔧 House MCP (Blocked - MCP Bug #7296)
+- **Status**: Disabled - waiting for MCP tool access fix
+- **Purpose**: Tool configuration and API documentation specialist
+- **Blocker**: Sub-agents cannot access MCP servers
+- **ETA**: Once Claude Code bug #7296 is resolved
+
+### 📸 House Vision (Research Phase)
+- **Status**: Planned - researching optimal approach
+- **Purpose**: Screenshot and UI analysis
+- **Challenge**: Image context must be file-based to save tokens
+- **Use Case**: Iterative UI review from screenshot files
+
+### 📊 House Data (Research Phase)
+- **Status**: Planned - requires CLI tool prerequisites
+- **Purpose**: Database query and CSV analysis
+- **Challenge**: Needs database CLI tools (sqlite3, psql, mysql)
+- **Blocker**: MCP database servers also affected by bug #7296
+
+Want to contribute? See [CONTRIBUTING.md](./CONTRIBUTING.md) for agent development guidelines.
 
 ## Contributing
 

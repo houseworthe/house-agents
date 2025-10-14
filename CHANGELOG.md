@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **house-git**: Git analysis agent for diffs, commits, and branch comparisons
+- Git workflow example in examples/git-workflow.md
+- "Future Agents" section in README documenting planned agents (house-vision, house-data, house-mcp)
+- Pattern 4 (Pre-Merge Review) in USAGE.md
+
+### Changed
+- Updated README to feature three production agents (research, bash, git)
+- Expanded INSTALL.md with house-git testing instructions
+- Updated USAGE.md with house-git examples and pre-merge workflow pattern
+- Clarified MCP tool access limitation affects future agents only
+
 ### Fixed
 - Agent files now use `.md` extension (required by Claude Code) instead of `.yaml`
 - Updated validation script to check for `.md` files

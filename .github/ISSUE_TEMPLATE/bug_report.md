@@ -29,7 +29,7 @@ What actually happened.
 - Claude Code Version: [e.g., 0.7.2]
 - OS: [e.g., macOS 14.1, Ubuntu 22.04]
 - Installation Method: [project-level or user-level]
-- Agent(s) Affected: [house-research, house-mcp, house-bash]
+- Agent(s) Affected: [house-research, house-git, house-bash]
 
 ## Agent Configuration
 
