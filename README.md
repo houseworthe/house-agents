@@ -28,42 +28,40 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 ## Quick Start
 
-### One-Click Install (Claude Code Prompt)
+### One-Command Install
 
-**Copy and paste this prompt into Claude Code in any project:**
+**Project-Level (this project only):**
 
+Copy and paste into Claude Code:
 ```
-Copy the .claude directory from [PATH_TO_HOUSE_AGENTS] to my current project. After installation, verify the three agent files exist (.claude/agents/house-research.yaml, house-mcp.yaml, house-bash.yaml), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.yaml, house-mcp.yaml, house-bash.yaml), then test house-research by finding all TODO comments in the codebase.
 ```
 
-Replace `[PATH_TO_HOUSE_AGENTS]` with the actual path, for example:
-- Local: `/Users/yourname/house-agents/`
-- After git clone: `/tmp/house-agents/`
+**User-Wide (all projects):**
 
-**For user-wide installation (available in all projects):**
-
+Copy and paste into Claude Code:
 ```
-Create ~/.claude/agents/ directory if it doesn't exist, then copy all YAML files from [PATH_TO_HOUSE_AGENTS]/.claude/agents/ to ~/.claude/agents/. List the files to confirm installation, then test with "use house-research to find README files".
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~/.claude/agents/ directory if it doesn't exist, then copy all YAML files from /tmp/house-agents/.claude/agents/ to ~/.claude/agents/. List the installed agents and test house-research by finding README files in the codebase.
 ```
 
 ### Manual Installation
 
-1. **Copy to your project:**
-   ```bash
-   cp -r /path/to/house-agents/.claude .
-   ```
+```bash
+# 1. Clone the repository
+git clone https://github.com/houseworthe/house-agents.git /tmp/house-agents
 
-2. **Or install user-wide** (available in ALL your projects):
-   ```bash
-   mkdir -p ~/.claude/agents
-   cp /path/to/house-agents/.claude/agents/*.yaml ~/.claude/agents/
-   ```
+# 2. Install project-level (current project only)
+cp -r /tmp/house-agents/.claude .
 
-3. **Verify installation:**
-   ```bash
-   ls -la .claude/agents/
-   # Should show: house-research.yaml, house-mcp.yaml, house-bash.yaml
-   ```
+# OR install user-wide (all projects)
+mkdir -p ~/.claude/agents
+cp /tmp/house-agents/.claude/agents/*.yaml ~/.claude/agents/
+
+# 3. Verify installation
+ls .claude/agents/  # or: ls ~/.claude/agents/
+```
+
+See [INSTALL.md](./INSTALL.md) for detailed instructions, troubleshooting, and updating.
 
 ### How It Works
 
