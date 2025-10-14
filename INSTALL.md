@@ -15,7 +15,7 @@ Install agents in your current project only (`.claude/agents/` directory).
 **Copy this into Claude Code:**
 
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.yaml, house-mcp.yaml, house-bash.yaml), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-mcp.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
 ```
 
 **What this does:**
@@ -35,13 +35,13 @@ Install agents globally for ALL your projects (`~/.claude/agents/` directory).
 **Copy this into Claude Code:**
 
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~/.claude/agents/ directory if it doesn't exist, then copy all YAML files from /tmp/house-agents/.claude/agents/ to ~/.claude/agents/. List the installed agents and test house-research by finding README files in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~/.claude/agents/ directory if it doesn't exist, then copy all .md files from /tmp/house-agents/.claude/agents/ to ~/.claude/agents/. List the installed agents and test house-research by finding README files in the codebase.
 ```
 
 **What this does:**
 1. Clones house-agents to /tmp/house-agents
 2. Creates ~/.claude/agents/ if needed
-3. Copies all 3 agent YAML files to ~/.claude/agents/
+3. Copies all 3 agent files to ~/.claude/agents/
 4. Lists installed agents
 5. Tests house-research to confirm it works
 
@@ -78,7 +78,7 @@ cp -r /tmp/house-agents/.claude .
 
 # Verify installation
 ls .claude/agents/
-# Should show: house-bash.yaml, house-mcp.yaml, house-research.yaml
+# Should show: house-bash.md, house-mcp.md, house-research.md
 ```
 
 #### User-Wide Installation
@@ -90,11 +90,11 @@ Install globally for all projects:
 mkdir -p ~/.claude/agents
 
 # Copy agent files
-cp /tmp/house-agents/.claude/agents/*.yaml ~/.claude/agents/
+cp /tmp/house-agents/.claude/agents/*.md ~/.claude/agents/
 
 # Verify installation
 ls ~/.claude/agents/
-# Should show: house-bash.yaml, house-mcp.yaml, house-research.yaml
+# Should show: house-bash.md, house-mcp.md, house-research.md
 ```
 
 ### Step 3: Verify Installation
@@ -155,7 +155,7 @@ After installation, verify everything works:
 - [ ] house-research returns condensed search results
 - [ ] house-bash parses command output correctly
 - [ ] house-mcp can access MCP tools (if available)
-- [ ] No YAML syntax errors in agent files
+- [ ] No syntax errors in agent files
 
 ---
 
@@ -174,7 +174,7 @@ ls ~/.claude/agents/
 
 **Try the /agents command** in Claude Code to see all loaded agents.
 
-### YAML Syntax Errors
+### Agent File Syntax Errors
 
 Run the validation script:
 ```bash
@@ -187,7 +187,7 @@ This checks all agent files for syntax errors and required fields.
 ### Agents Show Up But Don't Work
 
 1. **Restart Claude Code** - Sometimes agents need a reload
-2. **Check agent YAML** - Ensure frontmatter has all required fields (name, description, tools, model)
+2. **Check agent files** - Ensure frontmatter has all required fields (name, description, tools, model)
 3. **Test with simple task** - Try a basic search or command first
 4. **Check Claude Code logs** - Look for error messages
 
@@ -196,7 +196,7 @@ This checks all agent files for syntax errors and required fields.
 If you get permission errors:
 ```bash
 # Fix file permissions
-chmod 644 ~/.claude/agents/*.yaml
+chmod 644 ~/.claude/agents/*.md
 
 # Fix directory permissions
 chmod 755 ~/.claude/agents/
@@ -226,7 +226,7 @@ git clone https://github.com/houseworthe/house-agents.git
 cp -r /tmp/house-agents/.claude /path/to/your/project/
 
 # User-wide:
-cp /tmp/house-agents/.claude/agents/*.yaml ~/.claude/agents/
+cp /tmp/house-agents/.claude/agents/*.md ~/.claude/agents/
 ```
 
 **Check for changes:**
@@ -249,7 +249,7 @@ rm -rf .claude/agents/
 ### Remove User-Wide Agents
 
 ```bash
-rm ~/.claude/agents/house-*.yaml
+rm ~/.claude/agents/house-*.md
 
 # Or remove all agents
 rm -rf ~/.claude/agents/
@@ -292,6 +292,6 @@ After installation:
 |---------|---------|
 | `List all available sub-agents` | See installed agents |
 | `/agents` | Alternative way to list agents |
-| `./test-agents.sh` | Validate agent YAML files |
+| `./test-agents.sh` | Validate agent files |
 | `ls .claude/agents/` | Check project-level install |
 | `ls ~/.claude/agents/` | Check user-wide install |

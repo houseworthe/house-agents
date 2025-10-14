@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Agent files now use `.md` extension (required by Claude Code) instead of `.yaml`
+- Updated validation script to check for `.md` files
+- Updated all documentation to reference `.md` file extension
+
 ## [0.1.0-beta] - 2025-01-13
 
 ### Added

@@ -23,7 +23,7 @@ fi
 # Function to validate YAML structure
 validate_agent() {
     local file=$1
-    local name=$(basename "$file" .yaml)
+    local name=$(basename "$file" .md)
 
     echo "Testing: $name"
     TESTED=$((TESTED + 1))
@@ -87,7 +87,7 @@ validate_agent() {
 }
 
 # Validate each agent file
-for agent in "$AGENT_DIR"/*.yaml; do
+for agent in "$AGENT_DIR"/*.md; do
     if [ -f "$agent" ]; then
         validate_agent "$agent"
         echo ""

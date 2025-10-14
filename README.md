@@ -34,14 +34,14 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 Copy and paste into Claude Code:
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.yaml, house-mcp.yaml, house-bash.yaml), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-mcp.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
 ```
 
 **User-Wide (all projects):**
 
 Copy and paste into Claude Code:
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~/.claude/agents/ directory if it doesn't exist, then copy all YAML files from /tmp/house-agents/.claude/agents/ to ~/.claude/agents/. List the installed agents and test house-research by finding README files in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~/.claude/agents/ directory if it doesn't exist, then copy all .md files from /tmp/house-agents/.claude/agents/ to ~/.claude/agents/. List the installed agents and test house-research by finding README files in the codebase.
 ```
 
 ### Manual Installation
@@ -55,7 +55,7 @@ cp -r /tmp/house-agents/.claude .
 
 # OR install user-wide (all projects)
 mkdir -p ~/.claude/agents
-cp /tmp/house-agents/.claude/agents/*.yaml ~/.claude/agents/
+cp /tmp/house-agents/.claude/agents/*.md ~/.claude/agents/
 
 # 3. Verify installation
 ls .claude/agents/  # or: ls ~/.claude/agents/
@@ -105,7 +105,7 @@ Expected: Should show house-research, house-mcp, and house-bash in the list
 
 **Troubleshooting:**
 - If agents don't show up, run `ls .claude/agents/` to verify files exist
-- If agents error, check the YAML files for syntax errors
+- If agents error, check the agent files for syntax errors
 - User-level agents: `ls ~/.claude/agents/` to verify installation
 - Try `/agents` command in Claude Code to see all loaded agents
 
@@ -272,7 +272,7 @@ Agents are focused on their specialty - review their findings before implementin
 
 ## Customization
 
-Each agent's YAML file has two parts:
+Each agent file (`.md` format with YAML frontmatter) has two parts:
 
 **1. Frontmatter** (metadata):
 ```yaml
@@ -288,7 +288,7 @@ You are the House Research Agent...
 [detailed instructions for the agent]
 ```
 
-Edit the YAML files to customize:
+Edit the agent files to customize:
 - Which tools each agent can access
 - The agent's behavior and output format
 - Token budgets and priorities
