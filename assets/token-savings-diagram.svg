@@ -1,0 +1,53 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Without House Agents -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#c92a2a">❌ WITHOUT HOUSE AGENTS</text>
+
+  <!-- Single overloaded tube -->
+  <rect x="50" y="50" width="700" height="80" fill="#ff6b6b" stroke="#c92a2a" stroke-width="3" rx="10"/>
+  <text x="400" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Main Context Window: 580,000 tokens 💥</text>
+  <text x="400" y="95" text-anchor="middle" font-size="12" fill="#fff">🔍 Search: 250K | 📦 npm: 85K | 📚 Docs: 180K | 💬 History: 65K</text>
+  <text x="400" y="115" text-anchor="middle" font-size="11" fill="#ffe066">⚠️ OVERLOADED - Poor performance, wasted tokens</text>
+
+  <!-- With House Agents -->
+  <text x="400" y="200" text-anchor="middle" font-size="20" font-weight="bold" fill="#2f9e44">✅ WITH HOUSE AGENTS</text>
+
+  <!-- Main context - small tube -->
+  <rect x="50" y="220" width="80" height="60" fill="#51cf66" stroke="#2f9e44" stroke-width="3" rx="8"/>
+  <text x="90" y="245" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Main</text>
+  <text x="90" y="260" text-anchor="middle" font-size="10" fill="#fff">10K</text>
+  <text x="90" y="273" text-anchor="middle" font-size="9" fill="#fff">🎯 Clean</text>
+
+  <!-- House Research tube -->
+  <rect x="200" y="220" width="150" height="60" fill="#339af0" stroke="#1971c2" stroke-width="3" rx="8"/>
+  <text x="275" y="240" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">🔍 House Research</text>
+  <text x="275" y="255" text-anchor="middle" font-size="10" fill="#fff">250K tokens (isolated)</text>
+  <text x="275" y="273" text-anchor="middle" font-size="9" fill="#e3fafc">Returns 5K summary ➜</text>
+
+  <!-- House Bash tube -->
+  <rect x="380" y="220" width="120" height="60" fill="#339af0" stroke="#1971c2" stroke-width="3" rx="8"/>
+  <text x="440" y="240" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">⚡ House Bash</text>
+  <text x="440" y="255" text-anchor="middle" font-size="10" fill="#fff">85K tokens (isolated)</text>
+  <text x="440" y="273" text-anchor="middle" font-size="9" fill="#e3fafc">Returns 3K ➜</text>
+
+  <!-- House MCP tube -->
+  <rect x="530" y="220" width="140" height="60" fill="#339af0" stroke="#1971c2" stroke-width="3" rx="8"/>
+  <text x="600" y="240" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">🔧 House MCP</text>
+  <text x="600" y="255" text-anchor="middle" font-size="10" fill="#fff">180K tokens (isolated)</text>
+  <text x="600" y="273" text-anchor="middle" font-size="9" fill="#e3fafc">Returns 2K ➜</text>
+
+  <!-- Arrows pointing back to main -->
+  <path d="M 200 250 L 130 250" stroke="#2f9e44" stroke-width="2" fill="none" marker-end="url(#arrowgreen)"/>
+  <path d="M 380 250 L 130 250" stroke="#2f9e44" stroke-width="2" fill="none" marker-end="url(#arrowgreen)"/>
+  <path d="M 530 250 L 130 250" stroke="#2f9e44" stroke-width="2" fill="none" marker-end="url(#arrowgreen)"/>
+
+  <!-- Result -->
+  <text x="400" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#2f9e44">Result: 98% Token Savings</text>
+  <text x="400" y="340" text-anchor="middle" font-size="13" fill="#495057">$1.74 → $0.03 per operation</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2f9e44"/>
+    </marker>
+  </defs>
+</svg>
