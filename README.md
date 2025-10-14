@@ -20,6 +20,10 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 **House Agents** are specialized Claude Code sub-agents that run in their own context windows. Each agent handles specific heavy operations and returns condensed results to your main conversation.
 
+<div align="center">
+  <img src="assets/token-savings-diagram.svg" alt="Token Efficiency Comparison: With vs Without House Agents showing 98% token reduction" width="100%">
+</div>
+
 ### The Three House Agents
 
 1. **🔍 House Research** - File and documentation search specialist
