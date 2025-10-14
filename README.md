@@ -157,11 +157,13 @@ All in condensed format (5k-10k tokens total instead of 100k+).
 
 ### 🔧 House MCP
 
+> ⚠️ **Current Limitation**: Due to [Claude Code bug #7296](https://github.com/anthropics/claude-code/issues/7296), this agent cannot access MCP tools yet. It can still fetch documentation via WebFetch, but native MCP integrations (Context7, Notion, etc.) don't work until the bug is fixed.
+
 **Use For:**
 - Configuring complex tools (WordPress, Shopify, Stripe)
 - Understanding verbose API documentation
 - Generating integration code
-- Using MCP tools for external services
+- ~~Using MCP tools for external services~~ (blocked by bug)
 
 **Example Invocations:**
 ```
@@ -318,6 +320,7 @@ Claude Code loads both, with project-level taking precedence.
 2. **No shared memory** - Each agent starts fresh (no state between calls)
 3. **Cost**: More API calls, but often fewer total tokens = lower cost
 4. **Learning curve** - Knowing when to use which agent takes practice
+5. **MCP Tool Access (Known Bug)** - Sub-agents currently cannot access MCP tools, despite documentation stating they should inherit them. This is a confirmed bug in Claude Code ([Issue #7296](https://github.com/anthropics/claude-code/issues/7296)). **Impact**: `house-mcp` can only use WebFetch for documentation (not native MCP tools like Context7, Notion, etc.). The agent will work once this bug is fixed.
 
 ## Examples
 
