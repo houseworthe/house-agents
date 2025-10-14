@@ -20,9 +20,68 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 **House Agents** are specialized Claude Code sub-agents that run in their own context windows. Each agent handles specific heavy operations and returns condensed results to your main conversation.
 
-<div align="center">
-  <img src="assets/token-savings-diagram.svg" alt="Token Efficiency Comparison: With vs Without House Agents showing 98% token reduction" width="100%">
-</div>
+```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    primaryColor: '#ff6b6b'
+    primaryTextColor: '#fff'
+    primaryBorderColor: '#c92a2a'
+    lineColor: '#495057'
+    secondaryColor: '#51cf66'
+    tertiaryColor: '#339af0'
+---
+graph TB
+    subgraph without["❌ WITHOUT House Agents"]
+        direction TB
+        W1["Main Claude Context"]
+        W2["🔍 Search 100 files<br/>📊 250,000 tokens"]
+        W3["📦 npm install logs<br/>📊 85,000 tokens"]
+        W4["📚 MCP Documentation<br/>📊 180,000 tokens"]
+        W5["💬 Conversation history<br/>📊 65,000 tokens"]
+        W1 --> W2
+        W1 --> W3
+        W1 --> W4
+        W1 --> W5
+        WT["<b>TOTAL: ~580,000 tokens</b><br/>💸 $1.74 per operation<br/>🐌 Context pollution"]
+        style WT fill:#ff6b6b,stroke:#c92a2a,color:#fff
+        style W1 fill:#ff8787,stroke:#c92a2a
+        style W2 fill:#ffc9c9,stroke:#c92a2a
+        style W3 fill:#ffc9c9,stroke:#c92a2a
+        style W4 fill:#ffc9c9,stroke:#c92a2a
+        style W5 fill:#ffc9c9,stroke:#c92a2a
+    end
+
+    subgraph with["✅ WITH House Agents"]
+        direction TB
+        M1["Main Claude Context<br/>🎯 Clean & Focused"]
+        H1["🔍 House Research<br/>searches 100 files in isolation"]
+        H2["⚡ House Bash<br/>runs npm install in isolation"]
+        H3["🔧 House MCP<br/>reads docs in isolation"]
+        R1["📝 5k token summary"]
+        R2["📝 3k token summary"]
+        R3["📝 2k token summary"]
+        H1 -.-> R1
+        H2 -.-> R2
+        H3 -.-> R3
+        R1 --> M1
+        R2 --> M1
+        R3 --> M1
+        MT["<b>TOTAL: ~10,000 tokens</b><br/>💸 $0.03 per operation<br/>⚡ 98% savings"]
+        style MT fill:#51cf66,stroke:#2f9e44,color:#fff
+        style M1 fill:#8ce99a,stroke:#2f9e44
+        style H1 fill:#d0ebff,stroke:#1971c2
+        style H2 fill:#d0ebff,stroke:#1971c2
+        style H3 fill:#d0ebff,stroke:#1971c2
+        style R1 fill:#a5d8ff,stroke:#1971c2
+        style R2 fill:#a5d8ff,stroke:#1971c2
+        style R3 fill:#a5d8ff,stroke:#1971c2
+    end
+
+    style without fill:#fff5f5,stroke:#c92a2a,stroke-width:3px
+    style with fill:#f4fce3,stroke:#2f9e44,stroke-width:3px
+```
 
 ### The Three House Agents
 
