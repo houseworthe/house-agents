@@ -52,14 +52,14 @@ See [Future Agents](#future-agents) for planned additions (house-mcp, house-visi
 
 Copy and paste into Claude Code:
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-git.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents. Detect my OS and use appropriate commands to copy the .claude directory to my current project (use Git Bash commands on Windows if available, otherwise try PowerShell). After copying, verify all three agent files exist in .claude/agents/ directory. Then list all available sub-agents to confirm they're loaded. Finally, test house-research by asking it to find all TODO comments in the codebase - make sure to invoke it correctly as a sub-agent.
 ```
 
 **User-Wide (all projects):**
 
 Copy and paste into Claude Code:
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~/.claude/agents/ directory if it doesn't exist, then copy all .md files from /tmp/house-agents/.claude/agents/ to ~/.claude/agents/. List the installed agents and test house-research by finding README files in the codebase.
+Clone https://github.com/houseworthe/house-agents. Detect my OS and create ~/.claude/agents/ directory (or Windows equivalent %USERPROFILE%\.claude\agents\). Copy all .md files from the cloned repo's .claude/agents/ to that directory using OS-appropriate commands. List the installed files, then list all available sub-agents to confirm they loaded. Test house-research by finding README files in the current directory - invoke it as a sub-agent.
 ```
 
 ### Manual Installation
