@@ -4,6 +4,8 @@
 [![GitHub release](https://img.shields.io/github/v/release/houseworthe/house-agents)](https://github.com/houseworthe/house-agents/releases)
 [![GitHub issues](https://img.shields.io/github/issues/houseworthe/house-agents)](https://github.com/houseworthe/house-agents/issues)
 
+![House Agents Architecture](assets/diagram.png)
+
 Specialized Claude Code sub-agents for context-efficient workflows. Keep your main conversation clean while delegating heavy operations to specialized "house agents."
 
 ## The Problem
@@ -20,11 +22,22 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 **House Agents** are specialized Claude Code sub-agents that run in their own context windows. Each agent handles specific heavy operations and returns condensed results to your main conversation.
 
+> **Measured in Production**
+>
+> Recent validation from actual usage:
+> - **house-research**: 70,100 tokens processed → 3,246 returned (95.4% savings)
+> - **house-git**: 42,900 tokens processed → ~500 returned (98.8% savings)
+> - **house-bash**: ~2,800 tokens processed → ~300 returned (89.3% savings)
+>
+> Total: 115,800 tokens quarantined, ~4,000 added to main context
+
 ### The Three House Agents
 
 1. **🔍 House Research** - File and documentation search specialist
-2. **🔧 House MCP** - Tool configuration and integration specialist
+2. **🔀 House Git** - Git diff and commit analysis specialist
 3. **⚡ House Bash** - Command execution and output parsing specialist
+
+See [Future Agents](#future-agents) for planned additions (house-mcp, house-vision, house-data).
 
 ## Quick Start
 
@@ -82,28 +95,21 @@ Use house-research to find all TODO comments in the codebase
 
 Expected: Should return a condensed list of TODOs with file:line references
 
-**2. Test House MCP (if you have MCP tools):**
-```
-Use house-mcp to show me how to configure environment variables for this project
-```
-
-Expected: Should return a working configuration example
-
-**3. Test House Bash:**
+**2. Test House Bash:**
 ```
 Use house-bash to check the current git status
 ```
 
 Expected: Should return a summary of git status (not raw output)
 
-**4. Test House Git:**
+**3. Test House Git:**
 ```
 Use house-git to review my current git diff
 ```
 
 Expected: Should return a condensed summary of changes (not raw diff output)
 
-**5. Check agents are loaded:**
+**4. Check agents are loaded:**
 ```
 List all available sub-agents
 ```
@@ -157,30 +163,7 @@ All in condensed format (3k-8k tokens total instead of 50k+).
 - Condensed findings with source references (`file:line`)
 - Pattern summaries across files
 - Actionable next steps
-- Condensed format instead of full file contents
-
-### 🔧 House MCP
-
-> ⚠️ **Current Limitation**: Due to [Claude Code bug #7296](https://github.com/anthropics/claude-code/issues/7296), this agent cannot access MCP tools yet. It can still fetch documentation via WebFetch, but native MCP integrations (Context7, Notion, etc.) don't work until the bug is fixed.
-
-**Use For:**
-- Configuring complex tools (WordPress, Shopify, Stripe)
-- Understanding verbose API documentation
-- Generating integration code
-- ~~Using MCP tools for external services~~ (blocked by bug)
-
-**Example Invocations:**
-```
-"Use house-mcp to configure Contact Form 7 with email validation"
-"Set up Stripe webhook handling with house-mcp"
-"Configure the Notion API integration"
-```
-
-**What It Returns:**
-- Working configuration code (minimal, 20-30 lines)
-- One usage example (5-10 lines)
-- Critical gotchas only
-- Concise output instead of verbose documentation
+- Real example: Codebase search across 10+ files processed 70k tokens, returned 3.2k (95.4% savings)
 
 ### ⚡ House Bash
 
@@ -254,16 +237,16 @@ Main Claude Code Session
 └── Receives condensed results from:
     │
     ├─→ House Research (separate context)
-    │   ├── Searches many files in its own context
-    │   └── Returns condensed summary to main
+    │   ├── Searches 70k+ tokens across 10+ files
+    │   └── Returns 3k token summary (95% savings)
     │
-    ├─→ House MCP (separate context)
-    │   ├── Reads verbose docs in its own context
-    │   └── Returns minimal config to main
+    ├─→ House Git (separate context)
+    │   ├── Analyzes 43k token diff
+    │   └── Returns 500 token summary (98% savings)
     │
     └─→ House Bash (separate context)
-        ├── Runs commands in its own context
-        └── Returns parsed summary to main
+        ├── Processes verbose command output
+        └── Returns parsed summary (89% savings)
 
 Heavy operations happen in agent contexts, not yours.
 ```
