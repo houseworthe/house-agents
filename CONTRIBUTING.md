@@ -23,7 +23,7 @@ This project follows a simple code of conduct: be respectful, constructive, and 
 Before creating a bug report:
 1. Check the [existing issues](https://github.com/houseworthe/house-agents/issues) to avoid duplicates
 2. Test with the latest version of Claude Code
-3. Verify the agent YAML files are properly formatted
+3. Verify the agent files are properly formatted
 
 When creating a bug report, include:
 - **Clear title**: Describe the issue concisely
@@ -31,7 +31,7 @@ When creating a bug report, include:
 - **Expected behavior**: What you expected to happen
 - **Actual behavior**: What actually happened
 - **Environment**: Claude Code version, OS, project type
-- **Agent YAML**: The relevant agent configuration (if modified)
+- **Agent Configuration**: The relevant agent configuration (if modified)
 
 ### Suggesting Enhancements
 
@@ -56,7 +56,7 @@ New agents should:
 
 #### 2. Design the Agent
 
-Create a YAML file in `.claude/agents/` with:
+Create an agent file (`.md` with YAML frontmatter) in `.claude/agents/` with:
 
 ```yaml
 ---
@@ -129,13 +129,13 @@ Add to `USAGE.md`:
 Pull requests will be evaluated on:
 - **Utility**: Does this solve a real problem?
 - **Token efficiency**: Does it actually save tokens?
-- **Code quality**: Is the YAML valid and well-structured?
+- **Code quality**: Is the agent file valid and well-structured?
 - **Documentation**: Are examples clear and complete?
 - **Testing**: Has it been tested in real scenarios?
 
 ## Style Guidelines
 
-### YAML Agent Files
+### Agent File Format
 
 ```yaml
 ---

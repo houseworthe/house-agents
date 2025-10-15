@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+(No unreleased changes yet)
+
+## [0.2.0-beta] - 2025-10-14
+
 ### Added
 - **house-git**: Git analysis agent for diffs, commits, and branch comparisons
 - Git workflow example in examples/git-workflow.md
@@ -18,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Expanded INSTALL.md with house-git testing instructions
 - Updated USAGE.md with house-git examples and pre-merge workflow pattern
 - Clarified MCP tool access limitation affects future agents only
+- Moved house-mcp to "Future Agents" (disabled) due to MCP tool access limitation
 
 ### Fixed
 - Agent files now use `.md` extension (required by Claude Code) instead of `.yaml`
@@ -30,8 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial beta release of House Agents
 - Three core agents:
   - **house-research**: File and documentation search specialist
-  - **house-mcp**: Tool configuration and integration specialist
   - **house-bash**: Command execution and output parsing specialist
+  - **house-mcp**: Tool configuration specialist (later moved to Future Agents in v0.2.0)
 - Comprehensive documentation:
   - README.md with overview and quick start
   - INSTALL.md with installation instructions
@@ -54,5 +59,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Token savings calculations
 - Troubleshooting guide
 
-[Unreleased]: https://github.com/houseworthe/house-agents/compare/v0.1.0-beta...HEAD
+[Unreleased]: https://github.com/houseworthe/house-agents/compare/v0.2.0-beta...HEAD
+[0.2.0-beta]: https://github.com/houseworthe/house-agents/compare/v0.1.0-beta...v0.2.0-beta
 [0.1.0-beta]: https://github.com/houseworthe/house-agents/releases/tag/v0.1.0-beta

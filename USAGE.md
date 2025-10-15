@@ -6,7 +6,6 @@ Practical examples for using house agents in real-world scenarios.
 
 - [Single Agent Usage](#single-agent-usage)
   - [House Research Examples](#house-research-examples)
-  - [House MCP Examples](#house-mcp-examples)
   - [House Bash Examples](#house-bash-examples)
 - [Multi-Agent Workflows](#multi-agent-workflows)
 - [Common Patterns](#common-patterns)
@@ -98,161 +97,6 @@ Found 23 route definitions across 5 files. 12 GET, 8 POST, 3 DELETE routes.
 1. Add rate limiting to auth endpoints
 2. Implement input validation middleware
 3. Consider API versioning strategy
-```
-
----
-
-### House MCP Examples
-
-#### Example 1: Configuring Stripe
-
-**You:**
-```
-Use house-mcp to set up Stripe webhook handling for subscription events
-```
-
-**House MCP Agent Returns:**
-```
-## Configuration: Stripe Webhook Handler
-
-### Summary
-Express middleware for handling Stripe subscription webhooks with signature verification.
-
-### Configuration
-
-```javascript
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const express = require('express');
-
-const webhookRouter = express.Router();
-
-webhookRouter.post(
-  '/webhook',
-  express.raw({ type: 'application/json' }),
-  async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-
-    let event;
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body,
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } catch (err) {
-      return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
-
-    switch (event.type) {
-      case 'customer.subscription.created':
-        await handleSubscriptionCreated(event.data.object);
-        break;
-      case 'customer.subscription.updated':
-        await handleSubscriptionUpdated(event.data.object);
-        break;
-      case 'customer.subscription.deleted':
-        await handleSubscriptionCanceled(event.data.object);
-        break;
-      default:
-        console.log(`Unhandled event type ${event.type}`);
-    }
-
-    res.json({ received: true });
-  }
-);
-```
-
-### Important Notes
-- Use `express.raw()` not `express.json()` - signature verification requires raw body
-- Get STRIPE_WEBHOOK_SECRET from Stripe Dashboard → Developers → Webhooks
-- Test with Stripe CLI: `stripe listen --forward-to localhost:3000/webhook`
-- Production URL must be HTTPS
-
-### Next Steps
-1. Add webhook endpoint to your Express app
-2. Implement handler functions (handleSubscriptionCreated, etc)
-3. Configure webhook URL in Stripe Dashboard
-4. Test with Stripe CLI before deploying
-```
-
----
-
-#### Example 2: WordPress Contact Form 7
-
-**You:**
-```
-Use house-mcp to configure Contact Form 7 with custom validation and email notifications
-```
-
-**House MCP Agent Returns:**
-```
-## Configuration: Contact Form 7 Custom Setup
-
-### Summary
-CF7 form with email validation, honeypot spam protection, and custom email template.
-
-### Form Configuration
-
-```
-[text* your-name placeholder "Your Name"]
-[email* your-email placeholder "Your Email"]
-[tel your-phone placeholder "Phone (Optional)"]
-[textarea* your-message placeholder "Your Message"]
-[submit "Send Message"]
-```
-
-### Custom Validation (functions.php)
-
-```php
-add_filter('wpcf7_validate_email*', 'custom_email_validation', 20, 2);
-
-function custom_email_validation($result, $tag) {
-    $email = isset($_POST['your-email']) ? trim($_POST['your-email']) : '';
-
-    // Block disposable email domains
-    $blocked_domains = ['tempmail.com', '10minutemail.com', 'guerrillamail.com'];
-    $domain = substr(strrchr($email, "@"), 1);
-
-    if (in_array($domain, $blocked_domains)) {
-        $result->invalidate($tag, "Please use a permanent email address.");
-    }
-
-    return $result;
-}
-```
-
-### Email Template
-
-In CF7 form settings → Mail tab:
-
-**Subject:** `[your-name] sent a message from [_site_title]`
-
-**Message Body:**
-```
-Name: [your-name]
-Email: [your-email]
-Phone: [your-phone]
-
-Message:
-[your-message]
-
----
-Sent from: [_remote_ip]
-Time: [_date] [_time]
-```
-
-### Important Notes
-- Enable "Use HTML content type" for styled emails
-- Set up SMTP plugin (WP Mail SMTP) for reliable delivery
-- Add honeypot field to prevent bot submissions
-- Test emails go to spam → check SPF/DKIM records
-
-### Next Steps
-1. Install Contact Form 7 plugin
-2. Create new form with the markup above
-3. Add validation code to theme's functions.php
-4. Configure email template in form settings
-5. Test submission and check spam folder
 ```
 
 ---
@@ -592,14 +436,14 @@ Use house-bash to run the auth tests and check for regressions
 
 ### Workflow 2: Adding New API Integration
 
-**Step 1: Configuration**
+**Step 1: Research & Configuration**
 ```
-Use house-mcp to set up the SendGrid email API integration
+Research SendGrid email API documentation and configure the integration
 ```
 
 **Step 2: Implementation**
 ```
-[You implement the email sending functionality]
+[You implement the email sending functionality with main Claude]
 ```
 
 **Step 3: Testing**
@@ -640,13 +484,13 @@ Best for: Bug fixes, code cleanup
 3. "Use house-bash to run tests and verify fixes"
 ```
 
-### Pattern 2: Configure → Implement → Deploy
+### Pattern 2: Research → Implement → Deploy
 
 Best for: New features, integrations
 
 ```
-1. "Use house-mcp to configure [tool/service]"
-2. [Implement using the configuration]
+1. "Use house-research to find examples of [integration/pattern]"
+2. [Implement the feature with main Claude]
 3. "Use house-bash to build and deploy"
 ```
 
@@ -697,8 +541,8 @@ Read src/auth/auth.js
 
 **Bad:**
 ```
-Use house-research to find X, then use house-mcp to configure Y,
-then use house-bash to test Z, then use house-research to verify...
+Use house-research to find X, then use house-bash to test Y,
+then use house-git to review Z, then use house-research to verify...
 ```
 
 **Good:**
@@ -758,7 +602,7 @@ Explain how the authentication system in src/auth/ works
 
 3. **Use the Right Agent**
    - Searching files? → house-research
-   - Configuring tools? → house-mcp
+   - Analyzing git changes? → house-git
    - Running commands? → house-bash
 
 4. **Trust Agent Expertise**
@@ -776,7 +620,7 @@ Explain how the authentication system in src/auth/ works
 
 Having issues with house agents?
 
-1. Check agent YAML files for tool permissions
+1. Check agent files for tool permissions
 2. Verify you're using the right agent for the task
 3. Try being more specific in your request
 4. Break complex tasks into smaller steps
