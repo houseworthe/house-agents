@@ -7,6 +7,7 @@ Practical examples for using house agents in real-world scenarios.
 - [Single Agent Usage](#single-agent-usage)
   - [House Research Examples](#house-research-examples)
   - [House Bash Examples](#house-bash-examples)
+  - [House Git Examples](#house-git-examples)
 - [Multi-Agent Workflows](#multi-agent-workflows)
 - [Common Patterns](#common-patterns)
 - [Anti-Patterns](#anti-patterns)

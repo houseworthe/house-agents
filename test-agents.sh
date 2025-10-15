@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # House Agents Validation Script
-# Tests agent YAML files for syntax errors and required fields
+# Tests agent .md files for syntax errors and required fields
 
 set -e
 
