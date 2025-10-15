@@ -4,6 +4,11 @@
 [![GitHub release](https://img.shields.io/github/v/release/houseworthe/house-agents)](https://github.com/houseworthe/house-agents/releases)
 [![GitHub issues](https://img.shields.io/github/issues/houseworthe/house-agents)](https://github.com/houseworthe/house-agents/issues)
 
+> **⚠️ Beta Software (v0.2.0-beta)**
+>
+> House Agents is in active development. Core features are stable, but agent configurations
+> and APIs may change. Please report issues at [GitHub Issues](https://github.com/houseworthe/house-agents/issues).
+
 ![House Agents Architecture](assets/diagram.png)
 
 Specialized Claude Code sub-agents for context-efficient workflows. Keep your main conversation clean while delegating heavy operations to specialized "house agents."
@@ -27,9 +32,9 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 > Recent validation from actual usage:
 > - **house-research**: 70,100 tokens processed → 3,246 returned (95.4% savings)
 > - **house-git**: 42,900 tokens processed → ~500 returned (98.8% savings)
-> - **house-bash**: ~2,800 tokens processed → ~300 returned (89.3% savings)
+> - **house-bash**: 20,600 tokens processed → ~700 returned (96.6% savings)
 >
-> Total: 115,800 tokens quarantined, ~4,000 added to main context
+> Total: 133,600 tokens quarantined, ~4,500 added to main context
 
 ### The Three House Agents
 
@@ -245,8 +250,8 @@ Main Claude Code Session
     │   └── Returns 500 token summary (98% savings)
     │
     └─→ House Bash (separate context)
-        ├── Processes verbose command output
-        └── Returns parsed summary (89% savings)
+        ├── Processes 21k+ tokens of command output
+        └── Returns 700 token summary (97% savings)
 
 Heavy operations happen in agent contexts, not yours.
 ```
@@ -355,7 +360,7 @@ Want to contribute? See [CONTRIBUTING.md](./CONTRIBUTING.md) for agent developme
 
 These agents are templates - customize them for your workflow:
 
-1. Fork and modify the YAML files
+1. Fork and modify the agent files
 2. Share your custom agents
 3. Report issues or suggest improvements
 

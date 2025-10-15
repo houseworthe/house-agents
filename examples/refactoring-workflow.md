@@ -208,7 +208,7 @@ All 147 tests passed. Build completed without warnings.
 
 ❌ **Don't do this:**
 ```
-Use house-research to understand the auth system, then use house-mcp to configure JWT, then use house-bash to test it, then use house-research to verify...
+Use house-research to understand the auth system, then use house-bash to test it, then use house-research to verify, then use house-git to review changes...
 ```
 
 ✅ **Do this instead:**

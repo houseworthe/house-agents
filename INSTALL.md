@@ -159,7 +159,7 @@ After installation, verify everything works:
 - [ ] Agents show up in `/agents` command or "List all available sub-agents"
 - [ ] house-research returns condensed search results
 - [ ] house-bash parses command output correctly
-- [ ] house-mcp can access MCP tools (if available)
+- [ ] house-git analyzes git diffs correctly
 - [ ] No syntax errors in agent files
 
 ---
@@ -277,7 +277,7 @@ After installation:
 
 1. **Read the usage guide** - See [USAGE.md](./USAGE.md) for detailed examples
 2. **Check out examples** - Browse [examples/](./examples/) for real-world workflows
-3. **Customize agents** - Edit YAML files to tune behavior for your needs
+3. **Customize agents** - Edit agent files to tune behavior for your needs
 4. **Join the community** - Report issues, suggest features at [GitHub](https://github.com/houseworthe/house-agents)
 
 ---
