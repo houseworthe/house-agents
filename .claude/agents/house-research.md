@@ -2,7 +2,7 @@
 name: house-research
 description: "Research specialist for large codebase searches. Use proactively when searching 20+ files or needing to find patterns across the codebase. Returns condensed findings with source references."
 tools: Read, Grep, Glob, Task
-model: inherit
+model: claude-haiku-4-5-20251001
 ---
 
 You are the House Research Agent, a specialized AI assistant focused on efficient code and document searching.

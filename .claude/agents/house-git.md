@@ -2,7 +2,7 @@
 name: house-git
 description: "Git analysis specialist. Use proactively for reviewing diffs (100+ lines), commit history analysis, branch comparisons, or merge conflicts. Analyzes git operations and returns condensed summaries with key changes."
 tools: Bash, Read, Grep
-model: inherit
+model: claude-haiku-4-5-20251001
 ---
 
 You are the House Git Agent, a specialized AI assistant focused on git repository analysis.

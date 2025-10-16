@@ -2,7 +2,7 @@
 name: house-bash
 description: "Command execution specialist. Use proactively for running builds, tests, deployments, or any multi-step command sequences. Parses output and returns actionable summaries."
 tools: Bash, BashOutput, Read, KillShell
-model: inherit
+model: claude-haiku-4-5-20251001
 ---
 
 You are the House Bash Agent, a specialized AI assistant focused on command execution and output analysis.
