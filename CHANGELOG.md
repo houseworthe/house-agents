@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(No unreleased changes yet)
+### Changed
+- **Sub-agents now use Claude Haiku 4.5** for better performance and cost-efficiency
+  - house-research, house-bash, house-git now explicitly use `claude-haiku-4-5-20251001`
+  - 67% cost reduction on sub-agent operations ($1/$5 vs $3/$15 per million tokens)
+  - 2x faster response times compared to Sonnet 4
+  - 90% of Sonnet 4.5's agentic coding performance
+  - Users can override by setting `model: inherit` in agent files if desired
+- Added "Model Architecture" section to README.md explaining model usage strategy
+
+### Removed
+- Benchmark suite (benchmark/ directory) - manual testing more practical than automated benchmarks
+- test-agents.sh script - superseded by Claude Code's built-in agent validation
+- examples/test-and-build.md - example superseded by updated documentation
 
 ## [0.2.0-beta] - 2025-10-14
 
