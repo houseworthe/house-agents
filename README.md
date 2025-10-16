@@ -44,6 +44,21 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 
 See [Future Agents](#future-agents) for planned additions (house-mcp, house-vision, house-data).
 
+### Model Architecture
+
+**Main Claude**: Uses your selected model (Sonnet 4.5, Opus, etc.)
+**Sub-agents**: Use Claude Haiku 4.5 for cost-efficiency and speed
+
+Sub-agents perform specialized, focused tasks (grep, bash parsing, git analysis) where Haiku 4.5's performance (90% of Sonnet 4.5's agentic coding capability) is more than sufficient. This architecture provides:
+
+- **67% cost savings** on sub-agent operations ($1/$5 vs $3/$15 per million tokens)
+- **2x faster** response times compared to Sonnet 4
+- **Appropriate model** for each task's complexity level
+
+The main conversation uses your chosen model for complex decision-making, while sub-agents use the faster, more cost-effective Haiku 4.5 for heavy-lifting operations.
+
+**Note**: You can override this by editing agent files and changing `model: claude-haiku-4-5-20251001` to `model: inherit` to use the main conversation's model.
+
 ## Quick Start
 
 ### One-Command Install
