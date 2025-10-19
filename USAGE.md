@@ -8,6 +8,7 @@ Practical examples for using house agents in real-world scenarios.
   - [House Research Examples](#house-research-examples)
   - [House Bash Examples](#house-bash-examples)
   - [House Git Examples](#house-git-examples)
+  - [House MCP Examples](#house-mcp-examples)
 - [Multi-Agent Workflows](#multi-agent-workflows)
 - [Common Patterns](#common-patterns)
 - [Anti-Patterns](#anti-patterns)
@@ -410,6 +411,96 @@ Use house-git to analyze the last 10 commits on main
 1. Consider creating a release tag for the export feature
 2. User-related code is seeing heavy activity - may need refactoring
 3. Good test coverage being maintained
+```
+
+---
+
+### House MCP Examples
+
+#### Example 1: Configuring an MCP Server
+
+**You:**
+```
+Use house-mcp to help me configure the Context7 MCP server for library documentation
+```
+
+**House MCP Agent Returns:**
+```
+## Context7 MCP Server Config
+
+**Summary:** Access library documentation directly in Claude Code using Context7 MCP server.
+
+**Configuration (.mcp.json):**
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp"]
+    }
+  }
+}
+```
+
+**Usage:**
+```
+Ask Claude: "Use context7 to get React hooks documentation"
+Or: "Look up Next.js routing in context7"
+```
+
+**Critical Notes:**
+- No API key required - uses public documentation
+- Restart Claude Code after adding config
+- Works with 1000+ popular libraries
+
+**Need more?** Ask about: specific libraries, version selection, caching
+```
+
+---
+
+#### Example 2: General API Configuration
+
+**You:**
+```
+Use house-mcp to generate a SendGrid email integration config
+```
+
+**House MCP Agent Returns:**
+```
+## SendGrid Email Integration
+
+**Summary:** Send transactional emails via SendGrid API with Node.js
+
+**Code:**
+```javascript
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+async function sendEmail(to, subject, html) {
+  await sgMail.send({
+    to,
+    from: 'noreply@yourdomain.com', // Must be verified
+    subject,
+    html
+  });
+}
+```
+
+**Usage:**
+```javascript
+await sendEmail(
+  'user@example.com',
+  'Welcome!',
+  '<h1>Thanks for signing up</h1>'
+);
+```
+
+**Critical Notes:**
+- Verify sender email in SendGrid dashboard first
+- Never commit API keys (use environment variables)
+- Free tier: 100 emails/day
+
+**Need more?** Ask about: templates, attachments, tracking, webhooks
 ```
 
 ---

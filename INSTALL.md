@@ -139,6 +139,12 @@ Note: If no git changes exist, try:
 Use house-git to analyze the last 5 commits
 ```
 
+**Test house-mcp:**
+```
+Use house-mcp to help me understand how to configure an MCP server
+```
+Expected: Minimal example config with usage instructions
+
 ---
 
 ## 🔧 Installation Methods Comparison
@@ -160,6 +166,7 @@ After installation, verify everything works:
 - [ ] house-research returns condensed search results
 - [ ] house-bash parses command output correctly
 - [ ] house-git analyzes git diffs correctly
+- [ ] house-mcp returns minimal config examples
 - [ ] No syntax errors in agent files
 
 ---

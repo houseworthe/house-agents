@@ -36,13 +36,14 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 >
 > Total: 133,600 tokens quarantined, ~4,500 added to main context
 
-### The Three House Agents
+### The Four House Agents
 
 1. **🔍 House Research** - File and documentation search specialist
 2. **🔀 House Git** - Git diff and commit analysis specialist
 3. **⚡ House Bash** - Command execution and output parsing specialist
+4. **🔧 House MCP** - MCP tool configuration and documentation specialist
 
-See [Future Agents](#future-agents) for planned additions (house-mcp, house-vision, house-data).
+See [Future Agents](#future-agents) for planned additions (house-vision, house-data).
 
 ### Model Architecture
 
@@ -129,12 +130,19 @@ Use house-git to review my current git diff
 
 Expected: Should return a condensed summary of changes (not raw diff output)
 
-**4. Check agents are loaded:**
+**4. Test House MCP:**
+```
+Use house-mcp to help me understand how to configure an MCP server
+```
+
+Expected: Should return a minimal example config with usage instructions
+
+**5. Check agents are loaded:**
 ```
 List all available sub-agents
 ```
 
-Expected: Should show house-research, house-git, and house-bash in the list
+Expected: Should show house-research, house-git, house-bash, and house-mcp in the list
 
 **Troubleshooting:**
 - If agents don't show up, run `ls .claude/agents/` to verify files exist
@@ -229,6 +237,31 @@ All in condensed format (3k-8k tokens total instead of 50k+).
 - Changes grouped by file type (source/tests/config/docs)
 - Merge conflict locations (if applicable)
 - Recommendations for review focus
+
+### 🔧 House MCP
+
+**Use For:**
+- Configuring MCP servers (Context7, Notion, Puppeteer, etc.)
+- Reading verbose API documentation
+- Generating minimal working configs
+- Understanding tool integration requirements
+- Progressive disclosure of complex documentation
+
+**Example Invocations:**
+```
+"Use house-mcp to help configure the Context7 MCP server"
+"How do I set up [any MCP server]?"
+"Generate a minimal config for [any API/tool]"
+```
+
+**What It Returns:**
+- Minimal working configuration (20-30 lines max)
+- One clear usage example
+- Critical gotchas only (deal-breakers, not nice-to-haves)
+- Progressive disclosure (summary first, details on request)
+- Condensed documentation summaries
+
+**Note:** House MCP automatically inherits all MCP tools configured in your environment. No setup needed - it works with whatever servers you have.
 
 ## When to Use House Agents
 
