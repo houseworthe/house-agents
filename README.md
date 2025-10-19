@@ -33,8 +33,9 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 > - **house-research**: 70,100 tokens processed → 3,246 returned (95.4% savings)
 > - **house-git**: 42,900 tokens processed → ~500 returned (98.8% savings)
 > - **house-bash**: 20,600 tokens processed → ~700 returned (96.6% savings)
+> - **house-mcp**: 53,300 tokens processed → ~540 returned (99.0% savings)
 >
-> Total: 133,600 tokens quarantined, ~4,500 added to main context
+> Total: 187,000 tokens quarantined, ~5,000 added to main context
 
 ### The Four House Agents
 
