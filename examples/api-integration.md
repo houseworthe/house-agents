@@ -1,14 +1,6 @@
 # API Integration Example
 
-> **⚠️ FUTURE FEATURE EXAMPLE**
->
-> This example demonstrates planned **house-mcp** functionality that is currently
-> **disabled** due to [Claude Code Issue #7296](https://github.com/anthropics/claude-code/issues/7296).
->
-> **Status:** house-mcp will be enabled once sub-agents can access MCP tools.
-> **For now:** Use main Claude for API configuration tasks (still works, just not in separate context).
->
-> See [Future Agents](../README.md#future-agents) for updates.
+> **Note:** This example uses the **house-mcp** agent to handle verbose API documentation without polluting your main context.
 
 ## Scenario
 

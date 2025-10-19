@@ -370,7 +370,7 @@ Claude Code loads both, with project-level taking precedence.
 2. **No shared memory** - Each agent starts fresh (no state between calls)
 3. **Cost**: More API calls, but often fewer total tokens = lower cost
 4. **Learning curve** - Knowing when to use which agent takes practice
-5. **MCP Tool Access (Known Bug)** - Sub-agents currently cannot access MCP tools due to [Issue #7296](https://github.com/anthropics/claude-code/issues/7296). This affects potential future agents (house-mcp, house-data) that would benefit from MCP integrations. Current production agents (house-research, house-bash, house-git) use built-in tools only.
+5. **MCP Tool Access (Partial Workaround)** - Sub-agents had limited MCP tool access due to [Issue #7296](https://github.com/anthropics/claude-code/issues/7296). A workaround was discovered: omitting the `tools:` field allows sub-agents to inherit all MCP tools from the main session. This enabled house-mcp (now in production). The limitation still affects house-data which requires specific database MCP servers not yet widely available.
 
 ## Examples
 
@@ -383,12 +383,6 @@ See [USAGE.md](./USAGE.md) for detailed examples:
 ## Future Agents
 
 The following agents are planned but not yet implemented due to technical limitations:
-
-### 🔧 House MCP (Blocked - MCP Bug #7296)
-- **Status**: Disabled - waiting for MCP tool access fix
-- **Purpose**: Tool configuration and API documentation specialist
-- **Blocker**: Sub-agents cannot access MCP servers
-- **ETA**: Once Claude Code bug #7296 is resolved
 
 ### 📸 House Vision (Research Phase)
 - **Status**: Planned - researching optimal approach
