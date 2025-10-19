@@ -15,13 +15,13 @@ Install agents in your current project only (`.claude/agents/` directory).
 **Copy this into Claude Code:**
 
 ```
-Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the three agent files exist (.claude/agents/house-research.md, house-git.md, house-bash.md), then test house-research by finding all TODO comments in the codebase.
+Clone https://github.com/houseworthe/house-agents to /tmp/house-agents, then copy the .claude directory to my current project. Verify the four agent files exist (.claude/agents/house-research.md, house-git.md, house-bash.md, house-mcp.md), then test house-research by finding all TODO comments in the codebase.
 ```
 
 **What this does:**
 1. Clones house-agents to /tmp/house-agents
 2. Copies .claude/ directory to your current project
-3. Verifies all 3 agent files are present
+3. Verifies all 4 agent files are present
 4. Tests house-research agent to confirm it works
 
 **When to use:** You want agents only for this specific project, or you want to customize agents per-project.
@@ -139,6 +139,12 @@ Note: If no git changes exist, try:
 Use house-git to analyze the last 5 commits
 ```
 
+**Test house-mcp:**
+```
+Use house-mcp to help me understand how to configure an MCP server
+```
+Expected: Minimal example config with usage instructions
+
 ---
 
 ## 🔧 Installation Methods Comparison
@@ -160,6 +166,7 @@ After installation, verify everything works:
 - [ ] house-research returns condensed search results
 - [ ] house-bash parses command output correctly
 - [ ] house-git analyzes git diffs correctly
+- [ ] house-mcp returns minimal config examples
 - [ ] No syntax errors in agent files
 
 ---

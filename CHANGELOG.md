@@ -7,14 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **house-mcp agent** - MCP tool configuration specialist
+  - Works with all user-configured MCP servers (inherits all MCP tools automatically)
+  - Reads verbose documentation and returns minimal working configs
+  - Supports any MCP server (context7, notion, puppeteer, etc.)
+  - Uses Claude Haiku 4.5 for cost efficiency
+
 ### Changed
 - **Sub-agents now use Claude Haiku 4.5** for better performance and cost-efficiency
-  - house-research, house-bash, house-git now explicitly use `claude-haiku-4-5-20251001`
+  - house-research, house-bash, house-git, house-mcp now explicitly use `claude-haiku-4-5-20251001`
   - 67% cost reduction on sub-agent operations ($1/$5 vs $3/$15 per million tokens)
   - 2x faster response times compared to Sonnet 4
   - 90% of Sonnet 4.5's agentic coding performance
   - Users can override by setting `model: inherit` in agent files if desired
 - Added "Model Architecture" section to README.md explaining model usage strategy
+- **house-mcp moved from "Future Agents" to production** - MCP bug #7296 workaround found
+  - Omitting `tools:` field allows sub-agents to inherit all MCP tools from main session
+  - Updated to be MCP-agnostic (works with any configured MCP server)
 
 ### Removed
 - Benchmark suite (benchmark/ directory) - manual testing more practical than automated benchmarks

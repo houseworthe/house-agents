@@ -33,16 +33,18 @@ This "context pollution" reduces Claude's effectiveness and wastes tokens.
 > - **house-research**: 70,100 tokens processed → 3,246 returned (95.4% savings)
 > - **house-git**: 42,900 tokens processed → ~500 returned (98.8% savings)
 > - **house-bash**: 20,600 tokens processed → ~700 returned (96.6% savings)
+> - **house-mcp**: 53,300 tokens processed → ~540 returned (99.0% savings)
 >
-> Total: 133,600 tokens quarantined, ~4,500 added to main context
+> Total: 187,000 tokens quarantined, ~5,000 added to main context
 
-### The Three House Agents
+### The Four House Agents
 
 1. **🔍 House Research** - File and documentation search specialist
 2. **🔀 House Git** - Git diff and commit analysis specialist
 3. **⚡ House Bash** - Command execution and output parsing specialist
+4. **🔧 House MCP** - MCP tool configuration and documentation specialist
 
-See [Future Agents](#future-agents) for planned additions (house-mcp, house-vision, house-data).
+See [Future Agents](#future-agents) for planned additions (house-vision, house-data).
 
 ### Model Architecture
 
@@ -129,12 +131,19 @@ Use house-git to review my current git diff
 
 Expected: Should return a condensed summary of changes (not raw diff output)
 
-**4. Check agents are loaded:**
+**4. Test House MCP:**
+```
+Use house-mcp to help me understand how to configure an MCP server
+```
+
+Expected: Should return a minimal example config with usage instructions
+
+**5. Check agents are loaded:**
 ```
 List all available sub-agents
 ```
 
-Expected: Should show house-research, house-git, and house-bash in the list
+Expected: Should show house-research, house-git, house-bash, and house-mcp in the list
 
 **Troubleshooting:**
 - If agents don't show up, run `ls .claude/agents/` to verify files exist
@@ -229,6 +238,31 @@ All in condensed format (3k-8k tokens total instead of 50k+).
 - Changes grouped by file type (source/tests/config/docs)
 - Merge conflict locations (if applicable)
 - Recommendations for review focus
+
+### 🔧 House MCP
+
+**Use For:**
+- Configuring MCP servers (Context7, Notion, Puppeteer, etc.)
+- Reading verbose API documentation
+- Generating minimal working configs
+- Understanding tool integration requirements
+- Progressive disclosure of complex documentation
+
+**Example Invocations:**
+```
+"Use house-mcp to help configure the Context7 MCP server"
+"How do I set up [any MCP server]?"
+"Generate a minimal config for [any API/tool]"
+```
+
+**What It Returns:**
+- Minimal working configuration (20-30 lines max)
+- One clear usage example
+- Critical gotchas only (deal-breakers, not nice-to-haves)
+- Progressive disclosure (summary first, details on request)
+- Condensed documentation summaries
+
+**Note:** House MCP automatically inherits all MCP tools configured in your environment. No setup needed - it works with whatever servers you have.
 
 ## When to Use House Agents
 
@@ -337,7 +371,7 @@ Claude Code loads both, with project-level taking precedence.
 2. **No shared memory** - Each agent starts fresh (no state between calls)
 3. **Cost**: More API calls, but often fewer total tokens = lower cost
 4. **Learning curve** - Knowing when to use which agent takes practice
-5. **MCP Tool Access (Known Bug)** - Sub-agents currently cannot access MCP tools due to [Issue #7296](https://github.com/anthropics/claude-code/issues/7296). This affects potential future agents (house-mcp, house-data) that would benefit from MCP integrations. Current production agents (house-research, house-bash, house-git) use built-in tools only.
+5. **MCP Tool Access (Partial Workaround)** - Sub-agents had limited MCP tool access due to [Issue #7296](https://github.com/anthropics/claude-code/issues/7296). A workaround was discovered: omitting the `tools:` field allows sub-agents to inherit all MCP tools from the main session. This enabled house-mcp (now in production). The limitation still affects house-data which requires specific database MCP servers not yet widely available.
 
 ## Examples
 
@@ -350,12 +384,6 @@ See [USAGE.md](./USAGE.md) for detailed examples:
 ## Future Agents
 
 The following agents are planned but not yet implemented due to technical limitations:
-
-### 🔧 House MCP (Blocked - MCP Bug #7296)
-- **Status**: Disabled - waiting for MCP tool access fix
-- **Purpose**: Tool configuration and API documentation specialist
-- **Blocker**: Sub-agents cannot access MCP servers
-- **ETA**: Once Claude Code bug #7296 is resolved
 
 ### 📸 House Vision (Research Phase)
 - **Status**: Planned - researching optimal approach

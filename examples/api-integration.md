@@ -1,14 +1,6 @@
 # API Integration Example
 
-> **⚠️ FUTURE FEATURE EXAMPLE**
->
-> This example demonstrates planned **house-mcp** functionality that is currently
-> **disabled** due to [Claude Code Issue #7296](https://github.com/anthropics/claude-code/issues/7296).
->
-> **Status:** house-mcp will be enabled once sub-agents can access MCP tools.
-> **For now:** Use main Claude for API configuration tasks (still works, just not in separate context).
->
-> See [Future Agents](../README.md#future-agents) for updates.
+> **Note:** This example uses the **house-mcp** agent to handle verbose API documentation without polluting your main context.
 
 ## Scenario
 
@@ -207,12 +199,10 @@ Use house-bash to run 'stripe listen --forward-to localhost:3000/webhook' and tr
 
 **Without agents:** 180k+ tokens, 15+ min (reading full Stripe docs)
 
-## Why This Works (When Enabled)
+## Why This Works
 
-> **Note:** This describes the planned workflow once house-mcp is enabled.
-
-1. **house-mcp** (when enabled) will digest verbose API documentation
-2. Return only the working code you need
+1. **house-mcp** digests verbose API documentation
+2. Returns only the working code you need
 3. Main Claude implements without doc clutter
 4. **house-bash** verifies everything works
 5. Your context stays clean and focused

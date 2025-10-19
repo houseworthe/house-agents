@@ -23,3 +23,6 @@ Thumbs.db
 # Test outputs
 test-output/
 *.log
+
+# Benchmark (removed from project but may exist locally)
+benchmark/
