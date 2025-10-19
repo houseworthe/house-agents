@@ -385,11 +385,13 @@ See [USAGE.md](./USAGE.md) for detailed examples:
 
 The following agents are planned but not yet implemented due to technical limitations:
 
-### 📸 House Vision (Research Phase)
-- **Status**: Planned - researching optimal approach
-- **Purpose**: Screenshot and UI analysis
-- **Challenge**: Image context must be file-based to save tokens
-- **Use Case**: Iterative UI review from screenshot files
+### 📸 House Vision (Not Viable)
+- **Status**: Research completed - not proceeding with implementation
+- **Purpose**: Screenshot and UI analysis with token savings
+- **Finding**: Fresh screenshots pasted into Claude Code are embedded as image data in master context, consuming tokens immediately before delegation is possible
+- **Technical limitation**: Sub-agents can only receive text prompts via the Task tool. Master instance must consume image tokens before it can describe the image to a sub-agent
+- **Possible but not useful**: Could work with pre-saved image files (master receives path, sub-agent reads), but this doesn't match typical screenshot workflow
+- **Conclusion**: No significant token savings achievable for primary use case
 
 ### 📊 House Data (Research Phase)
 - **Status**: Planned - requires CLI tool prerequisites
