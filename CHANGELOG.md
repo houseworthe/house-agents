@@ -7,15 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-10-19
+
+### 🎉 Stable Release
+
+House Agents moves to v1.0.0 after successful production validation. All core agents tested and performing with 95-99% token savings in real-world usage.
+
+**Production Metrics:**
+- 187,000 tokens quarantined across operations
+- ~5,000 tokens returned to main context
+- 95-99% token reduction across all agents
+
 ### Added
-- **house-mcp agent** - MCP tool configuration specialist
+- **house-mcp agent** - MCP tool configuration specialist (4th production agent)
   - Works with all user-configured MCP servers (inherits all MCP tools automatically)
   - Reads verbose documentation and returns minimal working configs
   - Supports any MCP server (context7, notion, puppeteer, etc.)
   - Uses Claude Haiku 4.5 for cost efficiency
 
 ### Changed
-- **Sub-agents now use Claude Haiku 4.5** for better performance and cost-efficiency
+- **All sub-agents now use Claude Haiku 4.5** for optimal performance
   - house-research, house-bash, house-git, house-mcp now explicitly use `claude-haiku-4-5-20251001`
   - 67% cost reduction on sub-agent operations ($1/$5 vs $3/$15 per million tokens)
   - 2x faster response times compared to Sonnet 4
@@ -81,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Token savings calculations
 - Troubleshooting guide
 
-[Unreleased]: https://github.com/houseworthe/house-agents/compare/v0.2.0-beta...HEAD
+[Unreleased]: https://github.com/houseworthe/house-agents/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/houseworthe/house-agents/compare/v0.2.0-beta...v1.0.0
 [0.2.0-beta]: https://github.com/houseworthe/house-agents/compare/v0.1.0-beta...v0.2.0-beta
 [0.1.0-beta]: https://github.com/houseworthe/house-agents/releases/tag/v0.1.0-beta

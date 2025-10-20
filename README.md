@@ -4,11 +4,6 @@
 [![GitHub release](https://img.shields.io/github/v/release/houseworthe/house-agents)](https://github.com/houseworthe/house-agents/releases)
 [![GitHub issues](https://img.shields.io/github/issues/houseworthe/house-agents)](https://github.com/houseworthe/house-agents/issues)
 
-> **⚠️ Beta Software (v0.2.0-beta)**
->
-> House Agents is in active development. Core features are stable, but agent configurations
-> and APIs may change. Please report issues at [GitHub Issues](https://github.com/houseworthe/house-agents/issues).
-
 ![House Agents Architecture](assets/diagram.png)
 
 Specialized Claude Code sub-agents for context-efficient workflows. Keep your main conversation clean while delegating heavy operations to specialized "house agents."

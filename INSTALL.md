@@ -41,7 +41,7 @@ Clone https://github.com/houseworthe/house-agents to /tmp/house-agents. Create ~
 **What this does:**
 1. Clones house-agents to /tmp/house-agents
 2. Creates ~/.claude/agents/ if needed
-3. Copies all 3 agent files to ~/.claude/agents/
+3. Copies all 4 agent files to ~/.claude/agents/
 4. Lists installed agents
 5. Tests house-research to confirm it works
 
